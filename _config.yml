@@ -1,0 +1,13 @@
+# GitHub Pages configuration.
+# NOTE: this repo also ships a .nojekyll file, which tells GitHub Pages to
+# serve the files as-is (no Jekyll build). All internal links are relative,
+# so the site works unchanged under the /hackathon/ project-pages subpath.
+# This file is kept for metadata and in case Jekyll is ever re-enabled.
+title: "Build Day — The Upskilling Labs"
+description: "Build Day — August 15, 2026 at American University, Washington, DC. This cycle's project teams turn real civic problems into working prototypes."
+baseurl: "/hackathon"
+url: "https://theupskillinglabs.github.io"
+
+exclude:
+  - README.md
+  - .gitignore

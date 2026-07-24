@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       EVENT NAME — the copy runs as "Build Day". Confirm the final public
+       name/branding before launch and update <title>, og tags, and the hero.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <title>Build Day — The Upskilling Labs × American University</title>
+  <meta name="description" content="Build Day — August 15, 2026 at American University, Washington, DC. This cycle's project teams spend a day turning real civic problems into working prototypes with AI-native tools. Presented by The Upskilling Labs.">
+
+  <meta property="og:title" content="Build Day — The Upskilling Labs × American University">
+  <meta property="og:description" content="One day. One room. Real civic problems, turned into working prototypes. Saturday, August 15, 2026 · American University, Washington, DC.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#00141B">
+
+  <!-- Favicon: the orb, approximated (teal top, red lower lobe) on ink -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%2300141B'/><path d='M50 20a30 30 0 0 1 0 60z' fill='%23E11D2A'/><path d='M50 20a30 30 0 0 0 0 60z' fill='%230094A0'/><path d='M22 66 78 30' stroke='%230094A0' stroke-width='7' stroke-linecap='round'/></svg>">
+
+  <link rel="stylesheet" href="assets/brand.css">
+
+  <!--
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │  PRE-LAUNCH CHECKLIST — every [BRACKET] below is a placeholder.      │
+    │  Confirm and fill each before going live.                            │
+    │  • Event name / branding (title, og tags, hero)                      │
+    │  • Schedule times  ......................  section "The Day"          │
+    │  • Pod list  ............................  data/pods.js               │
+    │  • Mentors & judges  ....................  data/people.js             │
+    │  • Additional partner / sponsor logos  ..  section "Built With"       │
+    │  • Logistics: building/room, parking, accessibility, audience,       │
+    │    contact email  .......................  section "What You Need…"   │
+    │  • Registration: link, capacity, deadline, embed widget  ..  "Save…"  │
+    │  • FAQ confirmations (spectator track, virtual option)               │
+    │  • Footer: website, contact email, press/sponsor email, socials      │
+    └─────────────────────────────────────────────────────────────────────┘
+  -->
+
+  <style>
+    /* ── Page layout (brand tokens live in assets/brand.css) ── */
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+    .measure { max-width: var(--measure); }
+    section[id] { scroll-margin-top: 88px; }
+
+    .section { padding: 56px 0; }
+    @media (min-width: 1024px) { .section { padding: 88px 0; } }
+
+    .section-head { margin-bottom: 40px; }
+    .section-head .lbl { margin-bottom: 14px; }
+    .section-head p.t-lede { margin: 18px 0 0; max-width: 640px; }
+
+    /* Divider hairlines */
+    .rule-top { border-top: 1px solid var(--rule); }
+    .rule-top-d { border-top: 1px solid var(--rule-d); }
+
+    /* ── Sticky nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--ink);
+      border-bottom: 1px solid var(--rule-d);
+      min-height: 76px;
+      display: flex; align-items: center; gap: 24px;
+      padding: 0 var(--pad);
+    }
+    .nav__logo { flex-shrink: 0; display: flex; align-items: center; }
+    .nav__logo img { height: 30px; display: block; }
+    .nav__links { display: flex; gap: 2px; margin-left: auto; }
+    .nav__links a {
+      padding: 8px 12px; border-radius: var(--r);
+      font-size: 13px; font-weight: 500; color: var(--od2); white-space: nowrap;
+      transition: color .15s ease, background .15s ease;
+    }
+    .nav__links a:hover { color: #fff; background: rgba(255,255,255,.08); }
+    .nav__cta { flex-shrink: 0; }
+    @media (max-width: 899px) {
+      .nav__links { display: none; }
+      .nav__cta { margin-left: auto; }
+    }
+
+    /* ── Hero ── */
+    .hero { position: relative; overflow: hidden; padding: 72px 0 80px; }
+    @media (min-width: 1024px) { .hero { padding: 104px 0 112px; } }
+    .hero__toprule {
+      border-top: 1px solid var(--rule-d); padding-top: 16px; margin-bottom: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .hero__toprule img { height: 34px; display: block; }
+    .hero h1 { margin: 0 0 24px; max-width: 15ch; color: #fff; }
+    .hero__subhead { color: var(--od2); max-width: 60ch; margin: 0 0 28px; }
+    .hero__meta {
+      display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      margin: 0 0 36px; color: var(--od1); font-weight: 500;
+    }
+    .hero__meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    .hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Steps (Sense / Form / Build) ── */
+    .steps { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 40px; }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { padding: 24px; position: relative; }
+    .step__idx { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .step__num {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--tint); color: var(--teal-deep);
+      font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+      border: 1px solid var(--tint-edge);
+    }
+    .step h3 { margin: 0 0 8px; color: var(--ink); }
+    .step p { margin: 0; }
+    .step__arrow { color: var(--meta-soft); }
+
+    /* ── Schedule timeline ── */
+    .timeline { max-width: 760px; margin: 0; padding: 0; list-style: none; }
+    .tl { display: grid; grid-template-columns: 96px 24px 1fr; gap: 16px; padding-bottom: 28px; }
+    .tl:last-child { padding-bottom: 0; }
+    .tl__time { padding-top: 3px; }
+    .tl__rail { position: relative; display: flex; justify-content: center; }
+    .tl__node {
+      width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; z-index: 1;
+      background: var(--white); border: 2px solid var(--teal-deep);
+    }
+    .tl__rail::before {
+      content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+      top: 17px; bottom: -28px; width: 2px; background: var(--rule); z-index: 0;
+    }
+    .tl:last-child .tl__rail::before { display: none; }
+    .tl__body { padding-top: 2px; }
+    .tl__body h4 { margin: 0; color: var(--ink); }
+    @media (max-width: 599px) {
+      .tl { grid-template-columns: 78px 20px 1fr; gap: 12px; }
+    }
+
+    /* ── Placeholder treatments (visible = needs confirming) ── */
+    .tbd {
+      color: var(--meta);
+      border-bottom: 1px dashed var(--meta-soft);
+      font-style: normal;
+    }
+    .tbd-chip {
+      display: inline-flex; align-items: center; padding: 6px 10px;
+      border-radius: var(--r); border: 1px dashed var(--meta-soft);
+      color: var(--meta); font-size: 12px; font-weight: 600;
+      letter-spacing: .04em; font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .pending {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px 18px; border-radius: var(--r);
+      background: var(--tint); border: 1px solid var(--tint-edge);
+      margin-bottom: 28px;
+    }
+    .pending .status { margin-top: 2px; }
+    .pending p { margin: 0; }
+
+    /* ── Card grids (pods, people) ── */
+    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 980px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+    .pod { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 12px; }
+    .pod.is-placeholder { border-style: dashed; border-color: var(--meta-soft); box-shadow: none; background: transparent; }
+    .pod h3 { margin: 0; color: var(--ink); }
+    .pod__problem { margin: 0; flex: 1; }
+    .pod__meta { display: flex; align-items: center; gap: 8px; }
+
+    .person { padding: 20px; display: flex; gap: 16px; align-items: center; }
+    .person.is-placeholder { border-style: dashed; border-color: var(--meta-soft); box-shadow: none; background: transparent; }
+    .person__avatar {
+      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+      background: var(--tint); border: 1px solid var(--tint-edge);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal-deep); font-weight: 700; font-size: 18px; overflow: hidden;
+    }
+    .person__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .person__body { min-width: 0; }
+    .person__body h4 { margin: 0 0 4px; color: var(--ink); }
+    .person__body p { margin: 0 0 10px; }
+    /* Role marker — the brand status pattern (colored text + dot, no capsule) */
+    .role {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .role::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .role-mentor { color: var(--teal-deep); }
+    .role-mentor::before { background: var(--teal); box-shadow: 0 0 0 4px rgba(0, 148, 160, .18); }
+    .role-judge { color: var(--red); }
+    .role-judge::before { box-shadow: 0 0 0 4px rgba(225, 29, 42, .14); }
+
+    /* ── Partners (dark band) ── */
+    .partners { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 8px; }
+    @media (min-width: 768px) { .partners { grid-template-columns: repeat(3, 1fr); } }
+    .partner {
+      border: 1px solid var(--rule-d); border-radius: var(--r);
+      padding: 28px 24px; display: flex; flex-direction: column; gap: 14px;
+      background: rgba(255,255,255,.02);
+    }
+    .partner__mark { height: 40px; display: flex; align-items: center; }
+    .partner__mark img { height: 30px; width: auto; }
+    .partner__wordmark { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; line-height: 1.1; }
+    .partner p { margin: 0; color: var(--od2); font-size: 14px; line-height: 22px; }
+    .partner.is-placeholder { border-style: dashed; border-color: rgba(255,255,255,.28); background: transparent; }
+    .partner.is-placeholder .partner__wordmark { color: var(--od3); font-weight: 600; font-size: 15px; letter-spacing: 0; }
+
+    /* ── Proof pull-quote (dark band) ── */
+    .proof__quote { max-width: 22ch; color: #fff; margin: 0 0 24px; }
+    .proof__body { color: var(--od2); max-width: 62ch; margin: 0; }
+
+    /* ── Logistics list ── */
+    .facts { list-style: none; margin: 0; padding: 0; max-width: 760px; }
+    .facts li { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--rule); }
+    .facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .facts dt, .facts .facts__k { color: var(--ink); font-weight: 600; font-size: 15px; }
+    .facts .facts__v { color: var(--charcoal); font-size: 16px; }
+    .facts .facts__v a { color: var(--teal-deep); font-weight: 600; }
+    @media (max-width: 599px) { .facts li { grid-template-columns: 1fr; gap: 4px; } }
+
+    /* ── Register card ── */
+    .register-card { padding: 32px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+    @media (min-width: 768px) { .register-card { padding: 44px; } }
+    .register-card h2 { margin: 0; }
+    .register-card p { margin: 0; max-width: 56ch; }
+    .register-note { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* ── FAQ accordion ── */
+    .faq { max-width: 820px; border-top: 1px solid var(--rule); }
+    .faq details { border-bottom: 1px solid var(--rule); }
+    .faq summary {
+      list-style: none; cursor: pointer; padding: 22px 44px 22px 0; position: relative;
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink);
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: '+'; position: absolute; right: 6px; top: 18px;
+      font-size: 26px; font-weight: 400; color: var(--teal-deep); line-height: 1;
+      transition: transform .2s ease;
+    }
+    .faq details[open] summary::after { content: '–'; }
+    .faq__a { padding: 0 44px 24px 0; margin: 0; color: var(--charcoal); font-size: 16px; line-height: 24px; max-width: 68ch; }
+
+    /* ── Footer ── */
+    .footer { padding: 64px 0 40px; }
+    .footer__brand { color: var(--od1); max-width: 52ch; margin: 0 0 40px; }
+    .footer__cols { display: grid; gap: 32px; grid-template-columns: 1fr; margin-bottom: 44px; }
+    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer__col h5 { margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--od3); }
+    .footer__col a, .footer__col p { display: block; color: var(--od2); font-size: 14px; line-height: 26px; margin: 0; }
+    .footer__col a:hover { color: #fff; }
+    .footer__partners { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid var(--rule-d); border-bottom: 1px solid var(--rule-d); margin-bottom: 28px; }
+    .footer__partners img { height: 24px; width: auto; opacity: .85; }
+    .footer__partners .prail-lbl { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--od3); }
+    .footer__fine { color: var(--od3); font-size: 13px; line-height: 20px; margin: 0 0 8px; max-width: 70ch; }
+    .footer__legal { color: var(--od3); font-size: 13px; line-height: 20px; margin: 0; }
+
+    .arrow-link { color: var(--teal-deep); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ Nav ═══════════════════════════════════════════════════════════════ -->
+<header class="nav">
+  <a class="nav__logo" href="#top" aria-label="The Upskilling Labs — home">
+    <img src="assets/logo-lockup-light.png" alt="The Upskilling Labs">
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#about">What it is</a>
+    <a href="#schedule">The day</a>
+    <a href="#pods">Pods</a>
+    <a href="#partners">Partners</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="btn btn-teal btn-sm nav__cta" href="#register">Register</a>
+</header>
+
+<!-- ═══ 1 · Hero ══════════════════════════════════════════════════════════ -->
+<section id="top" class="hero s-cover grain">
+  <div class="wrap">
+    <div class="hero__toprule">
+      <img src="assets/logo-lockup-light.png" alt="The Upskilling Labs">
+      <span class="lbl" style="color:var(--od2)">Presented by The Upskilling Labs · in partnership with American University &amp; DC Public Library</span>
+    </div>
+
+    <p class="lbl lbl-on-dark" style="margin-bottom:20px">The Upskilling Labs × American University</p>
+
+    <h1 class="t-display">Build Day. One Cycle, One Room, <span style="color:var(--teal)">Real Problems.</span></h1>
+
+    <p class="hero__subhead t-lede" style="color:var(--od2)">On August 15, teams built from this cycle's Sensemaking Sprint spend a day turning real civic problems into working prototypes — using AI-native tools, in a room full of people who showed up to build something that matters.</p>
+
+    <p class="hero__meta t-body" style="color:var(--od1)">
+      <span>Saturday, August 15, 2026</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span>American University, Washington, DC</span>
+    </p>
+
+    <div class="hero__ctas">
+      <a class="btn btn-red" href="#register">Register to Attend</a>
+      <a class="btn btn-ghost-dark" href="#partners">Sponsor or Mentor This Cycle</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 · What This Is ══════════════════════════════════════════════════ -->
+<section id="about" class="section s-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">What this is</p>
+      <h2 class="t-h1">Not Just a Hackathon. The Payoff of a Whole Cycle.</h2>
+    </div>
+
+    <div class="measure">
+      <p class="t-body" style="margin:0 0 20px">This cycle didn't start today. It started weeks ago in the Sensemaking Sprint, where a room full of strangers mapped real problems, found the people who cared about the same ones, and built pods around them. Today, those pods show up as project teams — three to five people who spent the cycle turning a shared problem into something real.</p>
+      <p class="t-body" style="margin:0">This is where that work gets built. Not pitched, not planned — built. Teams spend the day with AI tools, research tools, and the same in-house tools The Labs builds for itself, and they leave with a working, deployed prototype and a live demo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="card step">
+        <div class="step__idx">
+          <span class="step__num">1</span>
+          <span class="lbl lbl-teal">Sense</span>
+        </div>
+        <h3 class="t-h3">Sensemaking Sprint</h3>
+        <p class="t-body">A room full of strangers maps real problems and surfaces the ones worth carrying.</p>
+      </div>
+      <div class="card step">
+        <div class="step__idx">
+          <span class="step__num">2</span>
+          <span class="lbl lbl-teal">Form</span>
+        </div>
+        <h3 class="t-h3">Pods become teams</h3>
+        <p class="t-body">Pods mobilize into project teams — three to five people around a shared problem.</p>
+      </div>
+      <div class="card step">
+        <div class="step__idx">
+          <span class="step__num">3</span>
+          <span class="lbl lbl-teal">Build</span>
+        </div>
+        <h3 class="t-h3">Build Day</h3>
+        <p class="t-body">The hackathon turns the idea into a shipped, deployed prototype and a live demo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3 · How the Day Runs ══════════════════════════════════════════════ -->
+<section id="schedule" class="section s-white">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">How the day runs</p>
+      <h2 class="t-h1">The Day, Start to Finish</h2>
+    </div>
+
+    <!-- Vertical timeline. Times are placeholders — confirm one week out. -->
+    <ol class="timeline">
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Doors open, breakfast, team check-in</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Framing talk: why this cycle's problems matter and what "done" looks like today</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Build Block 1: AI tools + research tools</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Mentor rounds</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Build Block 2: deploy your build (static site / GitHub Pages)</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Break</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Final build sprint</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Demos &amp; pitches</h4></div>
+      </li>
+      <li class="tl">
+        <div class="tl__time"><span class="tbd-chip">[TIME]</span></div>
+        <div class="tl__rail"><span class="tl__node"></span></div>
+        <div class="tl__body"><h4 class="t-h4">Judging + closing remarks</h4></div>
+      </li>
+    </ol>
+
+    <p class="t-small" style="margin-top:28px;max-width:640px">Exact times confirmed one week out. Food, wifi, and a full build environment provided — bring your laptop and nothing else.</p>
+  </div>
+</section>
+
+<!-- ═══ 4 · This Cycle's Pods ═════════════════════════════════════════════ -->
+<section id="pods" class="section s-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">This cycle's pods</p>
+      <h2 class="t-h1">What This Cycle's Teams Are Building</h2>
+      <p class="t-lede">Every project below started as a problem someone in the room cared enough about to make a case for.</p>
+    </div>
+
+    <!-- Cards render from data/pods.js — see that file to publish the real list. -->
+    <div id="pods-pending" class="pending" hidden>
+      <span class="status soon" aria-hidden="true"></span>
+      <p class="t-body"><strong style="color:var(--ink);font-weight:600">Final pod list drops about two weeks out.</strong> Teams are set by the Sensemaking Sprint vote — pulled in here once the results are final.</p>
+    </div>
+    <div id="pods-grid" class="grid grid-3" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═══ 5 · Partners ("Built With") — dark band ═══════════════════════════ -->
+<section id="partners" class="section s-cover grain">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-on-dark">Built with</p>
+      <h2 class="t-h1" style="color:#fff">Presented in Partnership</h2>
+    </div>
+
+    <div class="partners">
+      <div class="partner">
+        <div class="partner__mark"><span class="partner__wordmark">American University</span></div>
+        <p>Venue and academic partner for this cycle's Build Day.</p>
+      </div>
+      <div class="partner">
+        <div class="partner__mark"><img src="assets/dcpl-knockout-logo.png" alt="DC Public Library"></div>
+        <p>Home base for The Upskilling Labs' programming.</p>
+      </div>
+      <!-- Additional partners/sponsors: duplicate this block per confirmed logo. -->
+      <div class="partner is-placeholder">
+        <div class="partner__mark"><span class="partner__wordmark">[Additional partner / sponsor logos as confirmed]</span></div>
+        <p style="color:var(--od3)">Add one card per confirmed partner or sponsor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6 · Mentors & Judges ══════════════════════════════════════════════ -->
+<section id="mentors" class="section s-white">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">Mentors &amp; judges</p>
+      <h2 class="t-h1">Who's in the Room</h2>
+      <p class="t-lede">Mentors circulate all day. Judges show up for demos. Both are here because they want to see what gets built, not just hear about it.</p>
+    </div>
+
+    <!-- Cards render from data/people.js — see that file to publish the real list. -->
+    <div id="people-pending" class="pending" hidden>
+      <span class="status soon" aria-hidden="true"></span>
+      <p class="t-body"><strong style="color:var(--ink);font-weight:600">Mentor and judge list still confirming.</strong> Names go up here as they lock, pulled from the outreach tracker.</p>
+    </div>
+    <div id="people-grid" class="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ═══ 7 · Proof It Works — dark band ════════════════════════════════════ -->
+<section id="proof" class="section s-cover grain">
+  <div class="wrap">
+    <p class="lbl lbl-on-dark" style="margin-bottom:24px">Proof it works</p>
+    <h2 class="proof__quote t-h1">This Isn't Aspirational. People Have Already Walked This Path.</h2>
+    <p class="proof__body t-lede" style="color:var(--od2)">Some of the people running this program right now started exactly where today's participants are — in a pod, building something they cared about. They kept going. Now they're volunteer contributors to The Upskilling Labs itself. The path from participant to builder isn't a pitch here. It's just what happened last cycle.</p>
+  </div>
+</section>
+
+<!-- ═══ 8 · Logistics ═════════════════════════════════════════════════════ -->
+<section id="logistics" class="section s-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">Logistics</p>
+      <h2 class="t-h1">What You Need to Know</h2>
+    </div>
+
+    <ul class="facts">
+      <li><span class="facts__k">Where</span><span class="facts__v">American University, <span class="tbd">[building / room TBD]</span>, Washington, DC</span></li>
+      <li><span class="facts__k">Parking / Transit</span><span class="facts__v"><span class="tbd">[details TBD]</span></span></li>
+      <li><span class="facts__k">Accessibility</span><span class="facts__v"><span class="tbd">[details TBD]</span></span></li>
+      <li><span class="facts__k">What to bring</span><span class="facts__v">Your laptop. Everything else — food, tools, wifi — is covered.</span></li>
+      <li><span class="facts__k">Who it's for</span><span class="facts__v">This cycle's project teams. <span class="tbd">[Confirm: open to public spectators for demos? If yes, add an RSVP tier.]</span></span></li>
+      <li><span class="facts__k">Questions</span><span class="facts__v"><a href="mailto:[contact email]">[contact email]</a></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ 9 · Register ══════════════════════════════════════════════════════ -->
+<section id="register" class="section s-tint">
+  <div class="wrap">
+    <!--
+      If registration runs through Luma / Eventbrite, embed the widget in
+      place of the CTA button below (paste the provider's <iframe> or embed
+      script inside .register-card). Keep the heading and the space note.
+    -->
+    <div class="card register-card">
+      <p class="lbl lbl-teal">Register</p>
+      <h2 class="t-h1">Save Your Spot</h2>
+      <p class="t-body">Space is limited to this cycle's project teams and a small number of mentors and guests. <span class="tbd">[capacity number]</span> spots. <span class="tbd">[deadline]</span>.</p>
+      <div class="register-note">
+        <a class="btn btn-red" href="[registration link]">Register Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 · FAQ ══════════════════════════════════════════════════════════ -->
+<section id="faq" class="section s-white">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lbl lbl-teal">FAQ</p>
+      <h2 class="t-h1">Questions</h2>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Do I need to be part of this cycle to attend?</summary>
+        <p class="faq__a">This Build Day is for this cycle's project teams. <span class="tbd">[Confirm: if there's a spectator / demo-only track, add it here.]</span></p>
+      </details>
+      <details>
+        <summary>Can I switch pods on the day?</summary>
+        <p class="faq__a">No — pods are set by the Sensemaking Sprint vote and mobilization process ahead of time.</p>
+      </details>
+      <details>
+        <summary>What if my team isn't finished by demo time?</summary>
+        <p class="faq__a">Demos show real, working progress — not perfection. Partial builds are normal and expected.</p>
+      </details>
+      <details>
+        <summary>Is there a virtual option?</summary>
+        <p class="faq__a"><span class="tbd">[Confirm — likely no, in-person build day.]</span></p>
+      </details>
+      <details>
+        <summary>Do I need to know how to code?</summary>
+        <p class="faq__a">No. Teams use AI-native and research tools throughout the cycle specifically so build ability isn't a prerequisite.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11 · Footer — flat ink ════════════════════════════════════════════ -->
+<footer class="footer s-ink">
+  <div class="wrap">
+    <img src="assets/logo-lockup-light.png" alt="The Upskilling Labs" style="height:36px;display:block;margin-bottom:28px">
+    <p class="footer__brand t-lede" style="color:var(--od1)">A commons for upskilling — learn by doing, in the open. Projects, playbooks, and lessons, built like open source.</p>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h5>Build Day</h5>
+        <a href="#about">What it is</a>
+        <a href="#schedule">The day</a>
+        <a href="#pods">This cycle's pods</a>
+        <a href="#register">Register</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer__col">
+        <h5>The Upskilling Labs</h5>
+        <a href="[website]">[website]</a>
+        <a href="mailto:[contact email]">[contact email]</a>
+      </div>
+      <div class="footer__col">
+        <h5>Press &amp; sponsors</h5>
+        <a href="mailto:[press / sponsor email]">[press / sponsor email]</a>
+        <a href="[social links]">[social links]</a>
+      </div>
+    </div>
+
+    <div class="footer__partners">
+      <span class="prail-lbl">In partnership with</span>
+      <img src="assets/levy-strategic-design-white.png" alt="Levy Strategic Design">
+      <img src="assets/dcpl-knockout-logo.png" alt="DC Public Library">
+      <img src="assets/superbloom-white.png" alt="Superbloom Design">
+    </div>
+
+    <p class="footer__fine">The Upskilling Labs, Inc. operates as a fiscally sponsored project of Superbloom Design, a registered 501(c)(3) nonprofit organization.</p>
+    <p class="footer__legal">© 2026 The Upskilling Labs, Inc. · MIT code · CC BY 4.0 content · Built in the open.</p>
+  </div>
+</footer>
+
+<!-- ═══ Data-driven sections: pods + people ═══════════════════════════════ -->
+<script src="data/pods.js"></script>
+<script src="data/people.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    var esc = function (s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+
+    // ── Pods ──────────────────────────────────────────────────────────────
+    function renderPods() {
+      var grid = document.getElementById('pods-grid');
+      var pending = document.getElementById('pods-pending');
+      if (!grid) return;
+      if (typeof PODS_PENDING !== 'undefined' && PODS_PENDING && pending) pending.hidden = false;
+
+      var list = (typeof PODS !== 'undefined' && PODS) || [];
+      grid.innerHTML = list.map(function (p) {
+        var ph = p.placeholder ? ' is-placeholder' : '';
+        var builders = (p.builders != null && p.builders !== '')
+          ? '<span class="status soon" aria-hidden="true"></span><span class="t-small">' + esc(p.builders) + ' builders</span>'
+          : '<span class="t-small tbd">[X] builders</span>';
+        return '' +
+          '<article class="card pod' + ph + '">' +
+            '<h3 class="t-h3">' + esc(p.name) + '</h3>' +
+            '<p class="pod__problem t-body">' + esc(p.problem) + '</p>' +
+            '<div class="pod__meta">' + builders + '</div>' +
+          '</article>';
+      }).join('');
+    }
+
+    // ── Mentors & Judges ──────────────────────────────────────────────────
+    function initials(name) {
+      var parts = String(name || '').replace(/[\[\]]/g, '').trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return '—';
+      return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+    }
+
+    function renderPeople() {
+      var grid = document.getElementById('people-grid');
+      var pending = document.getElementById('people-pending');
+      if (!grid) return;
+      if (typeof PEOPLE_PENDING !== 'undefined' && PEOPLE_PENDING && pending) pending.hidden = false;
+
+      var list = (typeof PEOPLE !== 'undefined' && PEOPLE) || [];
+      grid.innerHTML = list.map(function (person) {
+        var ph = person.placeholder ? ' is-placeholder' : '';
+        var role = (person.role || '').toLowerCase() === 'judge' ? 'judge' : 'mentor';
+        var badgeLabel = role === 'judge' ? 'Judge' : 'Mentor';
+        var avatar = person.photo
+          ? '<img src="' + esc(person.photo) + '" alt="' + esc(person.name) + '">'
+          : esc(initials(person.name));
+        return '' +
+          '<article class="card person' + ph + '">' +
+            '<div class="person__avatar" aria-hidden="true">' + avatar + '</div>' +
+            '<div class="person__body">' +
+              '<h4 class="t-h4">' + esc(person.name) + '</h4>' +
+              '<p class="t-small">' + esc(person.tag) + '</p>' +
+              '<span class="role role-' + role + '">' + badgeLabel + '</span>' +
+            '</div>' +
+          '</article>';
+      }).join('');
+    }
+
+    renderPods();
+    renderPeople();
+  })();
+</script>
+
+</body>
+</html>
